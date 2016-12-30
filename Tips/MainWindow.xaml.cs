@@ -93,5 +93,58 @@ namespace Tips
             
         }
 
+        private void FrmMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void HideButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            this.AreaMenuItems[0].Checked = false;
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowTipsItem_Click(object sender, EventArgs e)
+        {
+            //显示主窗口
+            if (this.Visibility == Visibility.Hidden)
+            {
+                this.Show();
+                ((System.Windows.Forms.MenuItem)sender).Checked = true;
+            }
+            else if (this.Visibility == Visibility.Visible)
+            {
+                this.Hide();
+                ((System.Windows.Forms.MenuItem)sender).Checked = false;
+            }
+        }
+
+        private void DelayTaskItem_Click(object sender, EventArgs e)
+        {
+            //打开延迟任务列表
+        }
+
+        private void ShowHistoryItem_Click(object sender, EventArgs e)
+        {
+            //打开历史记录窗口
+        }
+
+        private void ShowOptionItem_Click(object sender, EventArgs e)
+        {
+            //打开配置窗口
+        }
+
+        private void ExitItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

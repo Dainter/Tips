@@ -75,6 +75,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI_Resources\ToolTipResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,6 +113,26 @@
   <ItemGroup>
     <Resource Include="Images\Note.ico" />
     <Resource Include="Images\NoteTaskbar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Topmost.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TipsHide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CreateTask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EditTask.png" />
+    <Resource Include="Images\EditTaskStep.png" />
+    <Resource Include="Images\FileSaveAsExcel.png" />
+    <Resource Include="Images\Qanalysis.png" />
+    <Resource Include="Images\StaticInfo.png" />
+    <Resource Include="Images\TaskAbort.png" />
+    <Resource Include="Images\TaskCompleted.png" />
+    <Resource Include="Images\TaskDelay.png" />
+    <Resource Include="Images\TaskResume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

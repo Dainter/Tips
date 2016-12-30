@@ -25,7 +25,7 @@ namespace Tips.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("微软雅黑, 20.25pt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("微软雅黑, 30pt")]
         public global::System.Drawing.Font FontFamily {
             get {
                 return ((global::System.Drawing.Font)(this["FontFamily"]));

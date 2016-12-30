@@ -5,17 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tips"
         xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-        Title="MainWindow" Height="400" Width="300" ShowInTaskbar="False" WindowStyle="None"
+        Title="MainWindow"  ShowInTaskbar="False" WindowStyle="None" 
+        SizeToContent="WidthAndHeight"  MinHeight="200" MinWidth="150"
         AreaIcon="Images/NoteTaskbar.ico" AreaVisibility="True" AreaText="Tips" 
-        Loaded="FrmMain_Loaded" MouseMove="FrmMain_MouseMove" >
+        Loaded="FrmMain_Loaded" MouseMove="FrmMain_MouseMove" MouseDoubleClick="FrmMain_MouseDoubleClick" Topmost="{Binding IsChecked, ElementName=TopMostButton, Mode=TwoWay}" >
+    <local:GWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GWindow.Resources>
     <local:GWindow.AreaMenuItems>
-            <forms:MenuItem Text="Open" DefaultItem="True" />
-            <forms:MenuItem Text="Exit" />
+        <forms:MenuItem x:Name="ShowTipsItem" Text="Show Tips" Checked="True" RadioCheck="False" Click="ShowTipsItem_Click" />
+        <forms:MenuItem x:Name="DelayTaskItem" Text="Delay Task" Click="DelayTaskItem_Click"/>
+        <forms:MenuItem x:Name="ShowHistoryItem" Text="History" Click="ShowHistoryItem_Click"/>
+        <forms:MenuItem x:Name="ShowOptionItem" Text="Option" Click="ShowOptionItem_Click"/>
+        <forms:MenuItem x:Name="ExitItem" Text="Exit" Click="ExitItem_Click" />
     </local:GWindow.AreaMenuItems>
-    <Grid>
-        <Grid.RowDefinitions></Grid.RowDefinitions>
-        <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
+            <StackPanel.Resources>
+                <ControlTemplate x:Key="CreateButtonTemplate">
+                    <Image Stretch="Fill" Source="/Tips;component/images/CreateTask.png"></Image>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                <ControlTemplate x:Key="HideButtonTemplate">
+                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"></Image>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </StackPanel.Resources>
+            <Button x:Name="CreateButton" Template="{StaticResource CreateButtonTemplate}" ToolTip="{DynamicResource CreateTip}" Click="CreateButton_Click" />
+            <ToggleButton x:Name="TopMostButton"  Height="26" Width="26" Background="Transparent" ToolTip="{DynamicResource TopMostTip}" >
+                <Image Stretch="Fill" Source="/Tips;component/images/Topmost.ico"></Image>
+            </ToggleButton>
+            <Button x:Name="HideButton" Template="{StaticResource HideButtonTemplate}" ToolTip="{DynamicResource HideTip}" Click="HideButton_Click" />
+        </StackPanel>
+        <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="24" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
+            <ListBox.Resources>
+                <ControlTemplate x:Key="ListItemTemplate">
+                    <TextBlock ></TextBlock>
+                </ControlTemplate>
+            </ListBox.Resources>
+            <ListBoxItem>任务1</ListBoxItem>
+            <ListBoxItem>任务2</ListBoxItem>
+        </ListBox>
 
     </Grid>
-    
 </local:GWindow>
