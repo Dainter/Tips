@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Tips"
+        xmlns:local="clr-namespace:Tips.UI_Resources"
         xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         Title="MainWindow"  ShowInTaskbar="False" WindowStyle="None" 
         SizeToContent="WidthAndHeight"  MinHeight="200" MinWidth="150"
@@ -13,7 +13,16 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="UI_Resources/CommandResource.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <ContextMenu x:Key="TaskContexMenu" HasDropShadow="True">
+                <MenuItem Name="TaskCompleteItem" Header="完成"/>
+                <MenuItem Name="TaskDelayItem" Header="推迟"/>
+                <MenuItem Name="TaskAbortItem" Header="取消"/>
+                <Separator></Separator>
+                <MenuItem Name="TaskEditItem" Header="编辑"/>
+                <MenuItem Name="TaskStepsItem" Header="查看步骤"/>
+            </ContextMenu>
         </ResourceDictionary>
     </local:GWindow.Resources>
     <local:GWindow.AreaMenuItems>
@@ -70,11 +79,14 @@
         <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="24" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
             <ListBox.Resources>
                 <ControlTemplate x:Key="ListItemTemplate">
-                    <TextBlock ></TextBlock>
+                    <StackPanel Margin="3">
+                        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TaskItem}}}"></TextBlock>
+                        <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TaskItem}}}"  SmallChange="1" />
+                    </StackPanel>
                 </ControlTemplate>
             </ListBox.Resources>
-            <ListBoxItem>任务1</ListBoxItem>
-            <ListBoxItem>任务2</ListBoxItem>
+            <local:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Progress="80">任务1</local:TaskItem>
+            <local:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" >任务2</local:TaskItem>
         </ListBox>
 
     </Grid>

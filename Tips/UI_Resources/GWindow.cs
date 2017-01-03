@@ -9,7 +9,7 @@ using System.Windows.Threading;
 using Drawing = System.Drawing;
 using System.Windows.Forms;
 
-namespace Tips
+namespace Tips.UI_Resources
 {
     public class GWindow : Window
     {

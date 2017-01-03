@@ -19,7 +19,7 @@ namespace Tips
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : GWindow
+    public partial class MainWindow : UI_Resources.GWindow
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct MARGINS
