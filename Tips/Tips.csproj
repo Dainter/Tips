@@ -61,6 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TipsDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TipsDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="UI_Resources\GWindow.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UI_Resources\TaskItem.cs" />
@@ -108,6 +113,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="TipsDBDataSet.xsc">
+      <DependentUpon>TipsDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TipsDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TipsDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TipsDBDataSet.xss">
+      <DependentUpon>TipsDBDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -138,6 +154,11 @@
     <Resource Include="Images\TaskCompleted.png" />
     <Resource Include="Images\TaskDelay.png" />
     <Resource Include="Images\TaskResume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TipsDB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

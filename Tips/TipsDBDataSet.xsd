@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TipsDBDataSet" targetNamespace="http://tempuri.org/TipsDBDataSet.xsd" xmlns:mstns="http://tempuri.org/TipsDBDataSet.xsd" xmlns="http://tempuri.org/TipsDBDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TipsDBConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TipsDBConnectionString (Settings)" PropertyReference="ApplicationSettings.Tips.Properties.Settings.GlobalReference.Default.TipsDBConnectionString" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewTaskSortTableAdapter" GeneratorDataComponentClassName="ViewTaskSortTableAdapter" Name="ViewTaskSort" UserDataComponentName="ViewTaskSortTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TipsDBConnectionString (Settings)" DbObjectName="ViewTaskSort" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT TaskName, StartDate, DeadDate, TaskStatusID, QPriority, CategoryPriority FROM ViewTaskSort</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TaskName" DataSetColumn="TaskName" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="DeadDate" DataSetColumn="DeadDate" />
+              <Mapping SourceColumn="TaskStatusID" DataSetColumn="TaskStatusID" />
+              <Mapping SourceColumn="QPriority" DataSetColumn="QPriority" />
+              <Mapping SourceColumn="CategoryPriority" DataSetColumn="CategoryPriority" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TipsDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TipsDBDataSet" msprop:Generator_UserDSName="TipsDBDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ViewTaskSort" msprop:Generator_TableClassName="ViewTaskSortDataTable" msprop:Generator_TableVarName="tableViewTaskSort" msprop:Generator_TablePropName="ViewTaskSort" msprop:Generator_RowDeletingName="ViewTaskSortRowDeleting" msprop:Generator_RowChangingName="ViewTaskSortRowChanging" msprop:Generator_RowEvHandlerName="ViewTaskSortRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewTaskSortRowDeleted" msprop:Generator_UserTableName="ViewTaskSort" msprop:Generator_RowChangedName="ViewTaskSortRowChanged" msprop:Generator_RowEvArgName="ViewTaskSortRowChangeEvent" msprop:Generator_RowClassName="ViewTaskSortRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TaskName" msprop:Generator_ColumnVarNameInTable="columnTaskName" msprop:Generator_ColumnPropNameInRow="TaskName" msprop:Generator_ColumnPropNameInTable="TaskNameColumn" msprop:Generator_UserColumnName="TaskName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DeadDate" msprop:Generator_ColumnVarNameInTable="columnDeadDate" msprop:Generator_ColumnPropNameInRow="DeadDate" msprop:Generator_ColumnPropNameInTable="DeadDateColumn" msprop:Generator_UserColumnName="DeadDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TaskStatusID" msprop:Generator_ColumnVarNameInTable="columnTaskStatusID" msprop:Generator_ColumnPropNameInRow="TaskStatusID" msprop:Generator_ColumnPropNameInTable="TaskStatusIDColumn" msprop:Generator_UserColumnName="TaskStatusID" type="xs:int" minOccurs="0" />
+              <xs:element name="QPriority" msprop:Generator_ColumnVarNameInTable="columnQPriority" msprop:Generator_ColumnPropNameInRow="QPriority" msprop:Generator_ColumnPropNameInTable="QPriorityColumn" msprop:Generator_UserColumnName="QPriority" type="xs:short" minOccurs="0" />
+              <xs:element name="CategoryPriority" msprop:Generator_ColumnVarNameInTable="columnCategoryPriority" msprop:Generator_ColumnPropNameInRow="CategoryPriority" msprop:Generator_ColumnPropNameInTable="CategoryPriorityColumn" msprop:Generator_UserColumnName="CategoryPriority" type="xs:short" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
