@@ -61,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\ProcessTask.cs" />
+    <Compile Include="Model\TaskPlan.cs" />
+    <Compile Include="Model\TaskStep.cs" />
     <Compile Include="TipsDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,9 +132,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Note.ico" />
     <Resource Include="Images\NoteTaskbar.ico" />

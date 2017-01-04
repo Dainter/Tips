@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.OleDb;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Interop;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 
 namespace Tips
@@ -35,7 +28,7 @@ namespace Tips
             IntPtr hwnd,
             ref MARGINS pMarInset);
         //Global Elements
-
+        TipsDBDataSet tipDB;
 
         public MainWindow()
         {
@@ -89,8 +82,12 @@ namespace Tips
 
         private void FrmMainInit()
         {
-
+            tipDB = new TipsDBDataSet();
             
+            TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter adapter = new TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter();
+            TipsDBDataSet.ViewTaskSortDataTable table = new TipsDBDataSet.ViewTaskSortDataTable();
+            adapter.Fill(table);
+            testbox.DataContext = tipDB;
         }
 
         private void FrmMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
