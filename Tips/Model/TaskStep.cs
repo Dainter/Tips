@@ -8,6 +8,7 @@ namespace Tips.Model
 {
     public class TaskStep
     {
+        int intIndex;
         string strStepName;
         bool bolCompleted;
 
@@ -22,8 +23,9 @@ namespace Tips.Model
             set { IsCompleted = value; }
         }
 
-        public TaskStep(string sName, bool bCompleted)
+        public TaskStep(int Index, string sName, bool bCompleted)
         {
+            intIndex = Index;
             strStepName = sName;
             bolCompleted = bCompleted;
         }

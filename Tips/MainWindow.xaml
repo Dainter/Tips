@@ -1,4 +1,4 @@
-﻿<ui:GWindow x:Name="FrmMain" x:Class="Tips.MainWindow"
+﻿<ui:GWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Tips"
         xmlns:ui="clr-namespace:Tips.UI_Resources"
         xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:TipsDBDataSetTableAdapters="clr-namespace:Tips.TipsDBDataSetTableAdapters" x:Name="FrmMain" x:Class="Tips.MainWindow"
         Title="MainWindow"  ShowInTaskbar="False" WindowStyle="None" 
         SizeToContent="WidthAndHeight"  MinHeight="200" MinWidth="150"
         AreaIcon="Images/NoteTaskbar.ico" AreaVisibility="True" AreaText="Tips" 
@@ -13,17 +14,10 @@
     <ui:GWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="UI_Resources/CommandResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
+                <ResourceDictionary Source="UI_Resources/CommandResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <ContextMenu x:Key="TaskContexMenu" HasDropShadow="True">
-                <MenuItem Name="TaskCompleteItem" Header="完成" Command="{DynamicResource TaskCompleteCommand}" />
-                <MenuItem Name="TaskDelayItem" Header="推迟" Command="{DynamicResource TaskDelayCommand}"/>
-                <MenuItem Name="TaskAbortItem" Header="取消" Command="{DynamicResource TaskAbortCommand}"/>
-                <Separator></Separator>
-                <MenuItem Name="TaskEditItem" Header="编辑" Command="{DynamicResource TaskEditCommand}"/>
-                <MenuItem Name="TaskStepsItem" Header="查看步骤" Command="{DynamicResource TaskStepsCommand}"/>
-            </ContextMenu>
+            
         </ResourceDictionary>
     </ui:GWindow.Resources>
     <ui:GWindow.AreaMenuItems>
@@ -35,8 +29,8 @@
     </ui:GWindow.AreaMenuItems>
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -45,9 +39,9 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
             <StackPanel.Resources>
                 <ControlTemplate x:Key="CreateButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/CreateTask.png"></Image>
+                    <Image Stretch="Fill" Source="/Tips;component/images/CreateTask.png"/>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Button.IsPressed" Value="True">
+                        <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="RenderTransform">
                                 <Setter.Value>
                                     <ScaleTransform ScaleX=".9" ScaleY=".9"/>
@@ -58,9 +52,9 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
                 <ControlTemplate x:Key="HideButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"></Image>
+                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Button.IsPressed" Value="True">
+                        <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="RenderTransform">
                                 <Setter.Value>
                                     <ScaleTransform ScaleX=".9" ScaleY=".9"/>
@@ -73,23 +67,31 @@
             </StackPanel.Resources>
             <Button x:Name="CreateButton" Template="{StaticResource CreateButtonTemplate}" ToolTip="{DynamicResource CreateTip}" Click="CreateButton_Click" />
             <ToggleButton x:Name="TopMostButton"  Height="26" Width="26" Background="Transparent" ToolTip="{DynamicResource TopMostTip}" >
-                <Image Stretch="Fill" Source="/Tips;component/images/Topmost.ico"></Image>
+                <Image Stretch="Fill" Source="/Tips;component/images/Topmost.ico"/>
             </ToggleButton>
             <Button x:Name="HideButton" Template="{StaticResource HideButtonTemplate}" ToolTip="{DynamicResource HideTip}" Click="HideButton_Click" />
         </StackPanel>
-        <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="24" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
+        <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="20" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
             <ListBox.Resources>
+                <ContextMenu x:Key="TaskContexMenu" HasDropShadow="True">
+                    <MenuItem x:Name="TaskCompleteItem" Header="完成" Command="{DynamicResource TaskCompleteCommand}" />
+                    <MenuItem x:Name="TaskDelayItem" Header="推迟" Command="{DynamicResource TaskDelayCommand}"/>
+                    <MenuItem x:Name="TaskAbortItem" Header="取消" Command="{DynamicResource TaskAbortCommand}"/>
+                    <Separator/>
+                    <MenuItem x:Name="TaskEditItem" Header="编辑" Command="{DynamicResource TaskEditCommand}"/>
+                    <MenuItem x:Name="TaskStepsItem" Header="查看步骤" Command="{DynamicResource TaskStepsCommand}"/>
+                </ContextMenu>
                 <ControlTemplate x:Key="ListItemTemplate">
                     <StackPanel Margin="3">
-                        <TextBlock Text="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ui:TaskItem}}}"></TextBlock>
+                        <TextBlock Text="{Binding TaskName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ui:TaskItem}}}"/>
                         <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ui:TaskItem}}}"  SmallChange="1" />
                     </StackPanel>
                 </ControlTemplate>
             </ListBox.Resources>
-            <ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Progress="80">任务1</ui:TaskItem>
-            <ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" >任务2</ui:TaskItem>
-            <ListBox x:Name="testbox"></ListBox>
+            <!--<ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Progress="80" Content="任务1"/>
+            <ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Content="任务2" />-->
+            
         </ListBox>
-
+        <!--<DataGrid Name="Testbox" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding }" ></DataGrid>-->
     </Grid>
 </ui:GWindow>

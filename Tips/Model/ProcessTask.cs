@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.OleDb;
 
 namespace Tips.Model
 {
@@ -14,15 +13,16 @@ namespace Tips.Model
         Completed = 4,
     }
 
-    public class ProcessTask
+    public class ProcessTask: IComparable<ProcessTask>
     {
         string strName;
         DateTime datStart;
         DateTime datDeadline;
         double dubPriority;
+        int intProgress;
         List<TaskStep> tasksteps;
         
-        public string Name
+        public string TaskName
         {
             get { return strName; }
         }
@@ -42,6 +42,11 @@ namespace Tips.Model
             get { return dubPriority; }
         }
 
+        public int Progress
+        {
+            get { return intProgress; }
+        }
+
         public List<TaskStep> TaskSteps
         {
             get { return tasksteps; }
@@ -58,10 +63,52 @@ namespace Tips.Model
 
         private void TaskStepInit(string sDatetime)
         {
+            DateTime start;
+            int index;
+            string sName;
+            bool bCompleted;
+            int intSteps = 0, intFinished = 0;
+            TaskStep newStep;
+
             tasksteps = new List<TaskStep>();
+            TipsDBDataSetTableAdapters.tabTaskStepTableAdapter adapter = new TipsDBDataSetTableAdapters.tabTaskStepTableAdapter();
+            TipsDBDataSet.tabTaskStepDataTable table = new TipsDBDataSet.tabTaskStepDataTable();
+            adapter.Fill(table);
 
-
+            foreach (DataRow currentRow in table.Rows)
+            {
+                start = (DateTime)currentRow["StartDate"];
+                if (start.ToString() != sDatetime)
+                {
+                    continue;
+                }
+                index = (int)currentRow["ID"];
+                sName = (string)currentRow["TaskStep"];
+                bCompleted = (bool)currentRow["StepCompleted"];
+                newStep = new TaskStep(index, sName, bCompleted);
+                tasksteps.Add(newStep);
+                intSteps++;
+                if (bCompleted == true)
+                {
+                    intFinished++;
+                }
+            }
+            if (intSteps == 0)
+            {
+                intProgress = 0;
+                return;
+            }
+            intProgress = (int)(intFinished * 100.0 / intSteps);
         }
 
+        public int CompareTo(ProcessTask other)
+        {
+            // A null value means that this object is greater.
+            if (other == null)
+            {
+                return 1;
+            }
+            return 0-this.Priority.CompareTo(other.Priority);
+        }
     }
 }

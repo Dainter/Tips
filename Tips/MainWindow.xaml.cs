@@ -2,10 +2,13 @@
 using System.Data;
 using System.Data.OleDb;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
+using Tips.Model;
+using Tips.UI_Resources;
 
 namespace Tips
 {
@@ -28,12 +31,14 @@ namespace Tips
             IntPtr hwnd,
             ref MARGINS pMarInset);
         //Global Elements
-        TipsDBDataSet tipDB;
+        TaskPlan taskplan;
 
         public MainWindow()
         {
             InitializeComponent();
+            
             FrmMainInit();
+            
         }
 
         private void ExtendAeroGlass(Window window)
@@ -82,13 +87,17 @@ namespace Tips
 
         private void FrmMainInit()
         {
-            tipDB = new TipsDBDataSet();
-            
-            TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter adapter = new TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter();
-            TipsDBDataSet.ViewTaskSortDataTable table = new TipsDBDataSet.ViewTaskSortDataTable();
-            adapter.Fill(table);
-            testbox.DataContext = tipDB;
+            taskplan = new TaskPlan();
+            RefreshTaskListBox();
+
+            //TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter adapter = new TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter();
+            //TipsDBDataSet.ViewTaskSortDataTable table = new TipsDBDataSet.ViewTaskSortDataTable();
+            //adapter.Fill(table);
+            //Testbox.DataContext = table;
+            //Testbox.DisplayMemberPath = "TaskName";
         }
+
+
 
         private void FrmMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -143,5 +152,16 @@ namespace Tips
         {
             this.Close();
         }
+
+        private void RefreshTaskListBox()
+        {
+            foreach (TaskItem newItem in taskplan.ProcessTaskList)
+            {
+                newItem.Template = TaskListBox.Resources["ListItemTemplate"] as ControlTemplate;
+                newItem.ContextMenu = TaskListBox.Resources["TaskContexMenu"] as ContextMenu;
+                TaskListBox.Items.Add(newItem);
+            }
+        }
+
     }
 }
