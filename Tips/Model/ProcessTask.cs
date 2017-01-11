@@ -101,6 +101,11 @@ namespace Tips.Model
             intProgress = (int)(intFinished * 100.0 / intSteps);
         }
 
+        public void TaskStepsRefresh()
+        {
+            TaskStepInit(datStart.ToString());
+        }
+
         public int CompareTo(ProcessTask other)
         {
             // A null value means that this object is greater.

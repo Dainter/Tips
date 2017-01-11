@@ -4,4 +4,5 @@
     <sys:String x:Key="CreateTip">Create a new task.</sys:String>
     <sys:String x:Key="TopMostTip">Keep the window topmost.</sys:String>
     <sys:String x:Key="HideTip">Hide the window.</sys:String>
+    <sys:String x:Key="CloseTip">Close the window.</sys:String>
 </ResourceDictionary>

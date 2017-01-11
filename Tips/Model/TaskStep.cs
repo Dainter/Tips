@@ -12,6 +12,11 @@ namespace Tips.Model
         string strStepName;
         bool bolCompleted;
 
+        public int Index
+        {
+            get { return intIndex; }
+        }
+
         public string StepName
         {
             get{ return strStepName; }
@@ -19,8 +24,8 @@ namespace Tips.Model
 
         public bool IsCompleted
         {
-            get { return IsCompleted; }
-            set { IsCompleted = value; }
+            get { return bolCompleted; }
+            set { bolCompleted = value; }
         }
 
         public TaskStep(int Index, string sName, bool bCompleted)

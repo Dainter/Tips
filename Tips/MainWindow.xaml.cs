@@ -36,7 +36,6 @@ namespace Tips
         public MainWindow()
         {
             InitializeComponent();
-            
             FrmMainInit();
             
         }
@@ -87,17 +86,25 @@ namespace Tips
 
         private void FrmMainInit()
         {
-            taskplan = new TaskPlan();
             RefreshTaskListBox();
-
-            //TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter adapter = new TipsDBDataSetTableAdapters.ViewTaskSortTableAdapter();
-            //TipsDBDataSet.ViewTaskSortDataTable table = new TipsDBDataSet.ViewTaskSortDataTable();
-            //adapter.Fill(table);
-            //Testbox.DataContext = table;
-            //Testbox.DisplayMemberPath = "TaskName";
         }
 
+        private void RefreshTaskListBox()
+        {
+            TaskListBox.Items.Clear();
+            taskplan = new TaskPlan();
+            foreach (TaskItem newItem in taskplan.ProcessTaskList)
+            {
+                newItem.Template = TaskListBox.Resources["ListItemTemplate"] as ControlTemplate;
+                newItem.ContextMenu = TaskListBox.Resources["TaskContexMenu"] as ContextMenu;
+                TaskListBox.Items.Add(newItem);
+            }
+        }
 
+        private void RefreshTaskSteps(int index)
+        {
+            taskplan.RefreshTaskSteps(index);
+        }
 
         private void FrmMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -153,15 +160,91 @@ namespace Tips
             this.Close();
         }
 
-        private void RefreshTaskListBox()
+        private void TaskCompleteCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            foreach (TaskItem newItem in taskplan.ProcessTaskList)
+            if (TaskListBox.SelectedIndex > -1)
             {
-                newItem.Template = TaskListBox.Resources["ListItemTemplate"] as ControlTemplate;
-                newItem.ContextMenu = TaskListBox.Resources["TaskContexMenu"] as ContextMenu;
-                TaskListBox.Items.Add(newItem);
+                e.CanExecute = true;
+                return;
             }
+            e.CanExecute = false;
+            return;
         }
 
+        private void TaskCompleteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void TaskDelayCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (TaskListBox.SelectedIndex > -1)
+            {
+                e.CanExecute = true;
+                return;
+            }
+            e.CanExecute = false;
+            return;
+        }
+
+        private void TaskDelayCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void TaskAbortCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (TaskListBox.SelectedIndex > -1)
+            {
+                e.CanExecute = true;
+                return;
+            }
+            e.CanExecute = false;
+            return;
+        }
+
+        private void TaskAbortCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void TaskEditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (TaskListBox.SelectedIndex > -1)
+            {
+                e.CanExecute = true;
+                return;
+            }
+            e.CanExecute = false;
+            return;
+        }
+
+        private void TaskEditCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void TaskStepsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (TaskListBox.SelectedIndex > -1)
+            {
+                e.CanExecute = true;
+                return;
+            }
+            e.CanExecute = false;
+            return;
+        }
+
+        private void TaskStepsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            int index = TaskListBox.SelectedIndex;
+            TaskStepsWindow WinTaskSteps = new TaskStepsWindow(taskplan.GetTaskbyIndex(index));
+            WinTaskSteps.Owner = this;
+            WinTaskSteps.ShowDialog();
+            if (WinTaskSteps.IsChanged == true)
+            {
+                RefreshTaskSteps(index);
+            }
+        }
     }
 }

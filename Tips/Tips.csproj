@@ -63,8 +63,11 @@
     </ApplicationDefinition>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ProcessTask.cs" />
-    <Compile Include="Model\TaskPlan.cs" />
+    <Compile Include="TaskPlan.cs" />
     <Compile Include="Model\TaskStep.cs" />
+    <Compile Include="TaskStepsWindow.xaml.cs">
+      <DependentUpon>TaskStepsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TipsDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,6 +75,7 @@
     </Compile>
     <Compile Include="UI_Resources\GWindow.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UI_Resources\StepItem.cs" />
     <Compile Include="UI_Resources\TaskItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TaskStepsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI_Resources\CommandResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

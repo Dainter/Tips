@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tips.Model;
 using Tips.UI_Resources;
 
-namespace Tips.Model
+namespace Tips
 {
     public class TaskPlan
     {
@@ -55,12 +53,15 @@ namespace Tips.Model
             CurrentTask.Sort();
             foreach (ProcessTask curTask in CurrentTask)
             {
-                newTaskItem = new TaskItem();
-                newTaskItem.Progress = curTask.Progress;
-                newTaskItem.TaskName = curTask.TaskName;
+                newTaskItem = new TaskItem(curTask.TaskName, curTask.Progress);
                 processtasklist.Add(newTaskItem);
             }
+        }
 
+        public void RefreshTaskSteps(int index)
+        {
+            CurrentTask[index].TaskStepsRefresh();
+            processtasklist[index].Progress = CurrentTask[index].Progress;
         }
 
         double CalPriority(TimeSpan total, TimeSpan remain, short iCategory, short iQlevel)
@@ -68,5 +69,21 @@ namespace Tips.Model
             return (iCategory * 10 + iQlevel) *1.0* (total.TotalHours/remain.TotalHours);
         }
 
+        public ProcessTask GetTaskbyIndex(int index)
+        {
+            return CurrentTask[index];
+        }
+
+        public string GetNamebyIndex(int index)
+        {
+            return CurrentTask[index].TaskName.ToString();
+        }
+
+        public string GetKeybyIndex(int index)
+        {
+            return CurrentTask[index].StartTime.ToString();
+        }
+
+        
     }
 }

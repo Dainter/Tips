@@ -17,9 +17,15 @@
                 <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
                 <ResourceDictionary Source="UI_Resources/CommandResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
         </ResourceDictionary>
     </ui:GWindow.Resources>
+    <ui:GWindow.CommandBindings>
+        <CommandBinding x:Name="TaskCompleteCommandBinding" Command="{StaticResource TaskCompleteCommand}" CanExecute="TaskCompleteCommandBinding_CanExecute" Executed="TaskCompleteCommandBinding_Executed" ></CommandBinding>
+        <CommandBinding x:Name="TaskDelayCommandBinding" Command="{StaticResource TaskDelayCommand}" CanExecute="TaskDelayCommandBinding_CanExecute" Executed="TaskDelayCommandBinding_Executed" ></CommandBinding>
+        <CommandBinding x:Name="TaskAbortCommandBinding" Command="{StaticResource TaskAbortCommand}" CanExecute="TaskAbortCommandBinding_CanExecute" Executed="TaskAbortCommandBinding_Executed" ></CommandBinding>
+        <CommandBinding x:Name="TaskEditCommandBinding" Command="{StaticResource TaskEditCommand}" CanExecute="TaskEditCommandBinding_CanExecute" Executed="TaskEditCommandBinding_Executed" ></CommandBinding>
+        <CommandBinding x:Name="TaskStepsCommandBinding" Command="{StaticResource TaskStepsCommand}" CanExecute="TaskStepsCommandBinding_CanExecute" Executed="TaskStepsCommandBinding_Executed" ></CommandBinding>
+    </ui:GWindow.CommandBindings>
     <ui:GWindow.AreaMenuItems>
         <forms:MenuItem x:Name="ShowTipsItem" Text="Show Tips" Checked="True" RadioCheck="False" Click="ShowTipsItem_Click" />
         <forms:MenuItem x:Name="DelayTaskItem" Text="Delay Task" Click="DelayTaskItem_Click"/>

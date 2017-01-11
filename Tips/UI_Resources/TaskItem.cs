@@ -9,19 +9,24 @@ namespace Tips.UI_Resources
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register("TaskName", typeof(string), typeof(TaskItem));
 
-        public static readonly DependencyProperty ProgressProperty =
+        public static DependencyProperty ProgressProperty =
             DependencyProperty.Register("Progress", typeof(int), typeof(TaskItem));
 
         public string TaskName
         {
             get { return (string)GetValue(TaskProperty); }
-            set { SetValue(TaskProperty, value); }
         }
 
         public int Progress
         {
             get { return (int)GetValue(ProgressProperty); }
             set { SetValue(ProgressProperty, value); }
+        }
+
+        public TaskItem(string sName, int iProgress) : base()
+        {
+            SetValue(TaskProperty, sName);
+            SetValue(ProgressProperty, iProgress);
         }
 
         protected override void OnInitialized(EventArgs e)
