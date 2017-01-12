@@ -7,31 +7,31 @@
         xmlns:ui="clr-namespace:Tips.UI_Resources"
         mc:Ignorable="d"
         Title="TaskStepsWindow" ShowInTaskbar="False" WindowStyle="None" 
-        MinHeight="150" MinWidth="100" WindowStartupLocation="CenterOwner"
-        MouseMove="WinTaskSteps_MouseMove" Loaded="WinTaskSteps_Loaded"  SizeToContent="WidthAndHeight" Closing="WinTaskSteps_Closing">
+        MinHeight="50" MinWidth="200" WindowStartupLocation="CenterOwner"
+        MouseMove="WinTaskSteps_MouseMove"  SizeToContent="WidthAndHeight" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:TipsDBDataSet x:Key="tipsDBDataSet"/>
-            <CollectionViewSource x:Key="tabTaskStepViewSource" Source="{Binding tabTaskStep, Source={StaticResource tipsDBDataSet}}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="TaskNameBox" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center"></TextBlock>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center">
+            请输入任务延迟的原因：
+        </TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="3">
             <StackPanel.Resources>
-                <ControlTemplate x:Key="HideButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
+                <ControlTemplate x:Key="AcceptButtonTemplate">
+                    <Image Stretch="Fill" Source="/Tips;component/images/Accept.png"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
                             <Setter Property="RenderTransform">
@@ -44,17 +44,9 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </StackPanel.Resources>
-            <Button x:Name="CloseButton" Template="{StaticResource HideButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="CloseButton_Click" />
+            <TextBox MinWidth="200" Height="20"></TextBox>
+                <Button x:Name="AcceptButton" Height="20" Width="20" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" />
         </StackPanel>
-        <ListBox x:Name="StepListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0" >
-            <ListBox.Resources>
-                <ControlTemplate x:Key="StepItemTemplate">
-                    <StackPanel Orientation="Horizontal" >
-                        <CheckBox FontSize="20" Foreground="Yellow" Content="{Binding TaskStep, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ui:StepItem}}}" UseLayoutRounding="False" IsChecked="{Binding IsCompleted, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ui:StepItem}}}" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </ListBox.Resources>
 
-        </ListBox>
     </Grid>
 </Window>

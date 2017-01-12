@@ -17,6 +17,8 @@
                 <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
                 <ResourceDictionary Source="UI_Resources/CommandResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <local:TipsDBDataSet x:Key="tipsDBDataSet"/>
+            <CollectionViewSource x:Key="tabProcessTaskViewSource" Source="{Binding tabProcessTask, Source={StaticResource tipsDBDataSet}}"/>
         </ResourceDictionary>
     </ui:GWindow.Resources>
     <ui:GWindow.CommandBindings>
@@ -96,7 +98,7 @@
             </ListBox.Resources>
             <!--<ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Progress="80" Content="任务1"/>
             <ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Content="任务2" />-->
-            
+
         </ListBox>
         <!--<DataGrid Name="Testbox" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding }" ></DataGrid>-->
     </Grid>

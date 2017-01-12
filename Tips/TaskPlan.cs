@@ -64,6 +64,12 @@ namespace Tips
             processtasklist[index].Progress = CurrentTask[index].Progress;
         }
 
+        public void RemoveTask(int index)
+        {
+            CurrentTask.RemoveAt(index);
+            processtasklist.RemoveAt(index);
+        }
+
         double CalPriority(TimeSpan total, TimeSpan remain, short iCategory, short iQlevel)
         {
             return (iCategory * 10 + iQlevel) *1.0* (total.TotalHours/remain.TotalHours);

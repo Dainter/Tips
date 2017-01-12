@@ -166,6 +166,7 @@
     <Resource Include="Images\TaskResume.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Accept.png" />
     <Content Include="TipsDB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

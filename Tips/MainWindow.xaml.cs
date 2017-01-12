@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Interop;
+using System.Windows.Data;
 using System.Runtime.InteropServices;
 using Tips.Model;
 using Tips.UI_Resources;
@@ -32,6 +33,8 @@ namespace Tips
             ref MARGINS pMarInset);
         //Global Elements
         TaskPlan taskplan;
+        TipsDBDataSet tipsDBDataSet;
+        TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter tipsDBDataSettabProcessTaskTableAdapter;
 
         public MainWindow()
         {
@@ -74,6 +77,15 @@ namespace Tips
         {
             this.Background = Brushes.Transparent;
             ExtendAeroGlass(this);
+            DataInit();
+        }
+
+        private void DataInit()
+        {
+            tipsDBDataSet = ((TipsDBDataSet)(this.FindResource("tipsDBDataSet")));
+            // 将数据加载到表 tabProcessTask 中。可以根据需要修改此代码。
+            tipsDBDataSettabProcessTaskTableAdapter = new TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter();
+            tipsDBDataSettabProcessTaskTableAdapter.Fill(tipsDBDataSet.tabProcessTask);
         }
 
         private void FrmMain_MouseMove(object sender, MouseEventArgs e)
@@ -104,6 +116,12 @@ namespace Tips
         private void RefreshTaskSteps(int index)
         {
             taskplan.RefreshTaskSteps(index);
+        }
+
+        private void RemoveCurrentTask(int index)
+        {
+            TaskListBox.Items.RemoveAt(index);
+            taskplan.RemoveTask(index);
         }
 
         private void FrmMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -173,7 +191,18 @@ namespace Tips
 
         private void TaskCompleteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            TaskComplete(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex));
+            RemoveCurrentTask(TaskListBox.SelectedIndex);
+        }
 
+        private void TaskComplete(string start)
+        {
+            String strCommand = "UPDATE tabProcessTask SET [TaskStatusID] = 4, [CompleteDate] = #" + DateTime.Now.ToString() +"# WHERE [StartDate] = #" + start +"#";
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabProcessTaskTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Close();
         }
 
         private void TaskDelayCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
