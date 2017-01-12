@@ -1,4 +1,4 @@
-﻿<Window x:Name="WinTaskSteps" x:Class="Tips.TaskStepsWindow"
+﻿<Window x:Class="Tips.DelayDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="TaskStepsWindow" ShowInTaskbar="False" WindowStyle="None" 
         MinHeight="50" MinWidth="200" WindowStartupLocation="CenterOwner"
-        MouseMove="WinTaskSteps_MouseMove"  SizeToContent="WidthAndHeight" >
+        MouseMove="Window_MouseMove"  SizeToContent="WidthAndHeight" Loaded="Window_Loaded" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -44,8 +44,8 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </StackPanel.Resources>
-            <TextBox MinWidth="200" Height="20"></TextBox>
-                <Button x:Name="AcceptButton" Height="20" Width="20" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" />
+            <TextBox x:Name="ReasonBox" MinWidth="200" Height="25" Margin="3"></TextBox>
+            <Button x:Name="AcceptButton" Height="30" Width="30" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="AcceptButton_Click" />
         </StackPanel>
 
     </Grid>

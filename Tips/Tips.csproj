@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DelayDialog.xaml.cs">
+      <DependentUpon>DelayDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ProcessTask.cs" />
     <Compile Include="TaskPlan.cs" />
@@ -77,6 +80,10 @@
     <Compile Include="Settings.cs" />
     <Compile Include="UI_Resources\StepItem.cs" />
     <Compile Include="UI_Resources\TaskItem.cs" />
+    <Page Include="DelayDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

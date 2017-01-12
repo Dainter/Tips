@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.OleDb;
 using System.Windows;
 using System.Windows.Controls;
@@ -218,7 +217,23 @@ namespace Tips
 
         private void TaskDelayCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            string strReason;
+            DelayDialog DiaDelay = new DelayDialog();
+            DiaDelay.Owner = this;
+            DiaDelay.ShowDialog();
+            strReason = DiaDelay.Reason;
+            TaskDelay(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex), strReason);
+            RemoveCurrentTask(TaskListBox.SelectedIndex);
+        }
 
+        private void TaskDelay(string start, string sReason)
+        {
+            String strCommand = "UPDATE tabProcessTask SET [TaskStatusID] = 2, [DelayReason] = '" + sReason + "' WHERE [StartDate] = #" + start + "#";
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabProcessTaskTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Close();
         }
 
         private void TaskAbortCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -234,7 +249,18 @@ namespace Tips
 
         private void TaskAbortCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            TaskAbort(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex));
+            RemoveCurrentTask(TaskListBox.SelectedIndex);
+        }
 
+        private void TaskAbort(string start)
+        {
+            String strCommand = "UPDATE tabProcessTask SET [TaskStatusID] = 3 WHERE [StartDate] = #" + start + "#";
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabProcessTaskTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabProcessTaskTableAdapter.Connection.Close();
         }
 
         private void TaskEditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
