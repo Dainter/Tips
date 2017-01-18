@@ -7,7 +7,7 @@
         xmlns:ui="clr-namespace:Tips.UI_Resources"
         mc:Ignorable="d"
         Title="TaskStepsWindow" ShowInTaskbar="False" WindowStyle="None" 
-        MinHeight="150" MinWidth="100" WindowStartupLocation="CenterOwner"
+        MinHeight="150" MinWidth="100" WindowStartupLocation="CenterOwner" 
         MouseMove="WinTaskSteps_MouseMove" Loaded="WinTaskSteps_Loaded"  SizeToContent="WidthAndHeight" Closing="WinTaskSteps_Closing">
     <Window.Resources>
         <ResourceDictionary>
@@ -30,7 +30,7 @@
         <TextBlock x:Name="TaskNameBox" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
             <StackPanel.Resources>
-                <ControlTemplate x:Key="HideButtonTemplate">
+                <ControlTemplate x:Key="CloseButtonTemplate">
                     <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ButtonBase.IsPressed" Value="True">
@@ -44,7 +44,7 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </StackPanel.Resources>
-            <Button x:Name="CloseButton" Template="{StaticResource HideButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="CloseButton_Click" />
+            <Button x:Name="CloseButton" Template="{StaticResource CloseButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="CloseButton_Click" />
         </StackPanel>
         <ListBox x:Name="StepListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0" >
             <ListBox.Resources>

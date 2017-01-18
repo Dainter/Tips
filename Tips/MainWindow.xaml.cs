@@ -276,7 +276,9 @@ namespace Tips
 
         private void TaskEditCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            EditWindow WinTaskEdit = new EditWindow(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex));
+            WinTaskEdit.Owner = this;
+            WinTaskEdit.ShowDialog();
         }
 
         private void TaskStepsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

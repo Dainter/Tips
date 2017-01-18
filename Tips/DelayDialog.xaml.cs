@@ -84,6 +84,11 @@ namespace Tips
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
             strReason = ReasonBox.Text;
+            if (strReason == "")
+            {
+                ReasonWarning.IsOpen = true;
+                return;
+            }
             this.Close();
         }
     }

@@ -44,7 +44,12 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </StackPanel.Resources>
-            <TextBox x:Name="ReasonBox" MinWidth="200" Height="25" Margin="3"></TextBox>
+            <TextBox x:Name="ReasonBox" MinWidth="200" Height="25" Margin="3" ToolTip="{DynamicResource ReasonWarnTip}" ></TextBox>
+            <Popup x:Name="ReasonWarning" PlacementTarget="{Binding ElementName=ReasonBox, Mode=OneWay}" StaysOpen="False">
+                <Border CornerRadius="2" BorderBrush="Red" BorderThickness="1" Background="White">
+                    <TextBlock Text="{DynamicResource ReasonWarnTip}" Background="White" Margin="1" Foreground="Red" ></TextBlock>
+                </Border>
+            </Popup>
             <Button x:Name="AcceptButton" Height="30" Width="30" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="AcceptButton_Click" />
         </StackPanel>
 

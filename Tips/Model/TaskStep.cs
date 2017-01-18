@@ -28,7 +28,7 @@ namespace Tips.Model
             set { bolCompleted = value; }
         }
 
-        public TaskStep(int Index, string sName, bool bCompleted)
+        public TaskStep(int Index, string sName, bool bCompleted = false)
         {
             intIndex = Index;
             strStepName = sName;

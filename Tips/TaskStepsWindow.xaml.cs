@@ -136,7 +136,7 @@ namespace Tips
 
         private void SaveModification(int Index, bool bIsCompleted)
         {
-            String strCommand = "UPDATE tabTaskStep SET [StepCompleted] = " + bIsCompleted.ToString() + " WHERE [ID] = "+ Index.ToString();
+            string strCommand = "UPDATE tabTaskStep SET [StepCompleted] = " + bIsCompleted.ToString() + " WHERE [ID] = "+ Index.ToString();
             tipsDBDataSettabTaskStepTableAdapter.Connection.Open();
             OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabTaskStepTableAdapter.Connection);
             int iCount = command.ExecuteNonQuery();
@@ -148,8 +148,5 @@ namespace Tips
         {
             CheckModify();
         }
-
-        
-
     }
 }

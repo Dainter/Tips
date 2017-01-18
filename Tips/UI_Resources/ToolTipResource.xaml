@@ -6,4 +6,7 @@
     <sys:String x:Key="HideTip">Hide the window.</sys:String>
     <sys:String x:Key="CloseTip">Close the window.</sys:String>
     <sys:String x:Key="AcceptTip">Submit the delay reason.</sys:String>
+    <sys:String x:Key="ReasonWarnTip">Please input the delay reason.</sys:String>
+    <sys:String x:Key="AddStepTip">Click to add one step.</sys:String>
+    <sys:String x:Key="RemoveStepTip">Click to remove the highlight step.</sys:String>
 </ResourceDictionary>
