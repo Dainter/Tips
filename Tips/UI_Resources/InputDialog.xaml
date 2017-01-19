@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ToolTipResource.xaml"/>
+                <ResourceDictionary Source="StyleResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -26,24 +27,8 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="TitleBox" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center">
-            
         </TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="3">
-            <StackPanel.Resources>
-                <ControlTemplate x:Key="AcceptButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/Accept.png"/>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="ButtonBase.IsPressed" Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </StackPanel.Resources>
             <TextBox x:Name="InputBox" MinWidth="200" Height="25" Margin="3" ToolTip="{DynamicResource WarnTip}" ></TextBox>
             <Popup x:Name="InputWarning" PlacementTarget="{Binding ElementName=ReasonBox, Mode=OneWay}" StaysOpen="False">
                 <Border CornerRadius="2" BorderBrush="Red" BorderThickness="1" Background="White">
@@ -52,6 +37,5 @@
             </Popup>
             <Button x:Name="AcceptButton" Height="30" Width="30" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="AcceptButton_Click" />
         </StackPanel>
-
     </Grid>
 </Window>

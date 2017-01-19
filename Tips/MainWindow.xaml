@@ -16,6 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
                 <ResourceDictionary Source="UI_Resources/CommandResource.xaml"/>
+                <ResourceDictionary Source="UI_Resources/StyleResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:TipsDBDataSet x:Key="tipsDBDataSet"/>
             <CollectionViewSource x:Key="tabProcessTaskViewSource" Source="{Binding tabProcessTask, Source={StaticResource tipsDBDataSet}}"/>
@@ -45,39 +46,11 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
-            <StackPanel.Resources>
-                <ControlTemplate x:Key="CreateButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/CreateTask.png"/>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="ButtonBase.IsPressed" Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-                <ControlTemplate x:Key="HideButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="ButtonBase.IsPressed" Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </StackPanel.Resources>
             <Button x:Name="CreateButton" Template="{StaticResource CreateButtonTemplate}" ToolTip="{DynamicResource CreateTip}" Click="CreateButton_Click" />
             <ToggleButton x:Name="TopMostButton"  Height="26" Width="26" Background="Transparent" ToolTip="{DynamicResource TopMostTip}" >
                 <Image Stretch="Fill" Source="/Tips;component/images/Topmost.ico"/>
             </ToggleButton>
-            <Button x:Name="HideButton" Template="{StaticResource HideButtonTemplate}" ToolTip="{DynamicResource HideTip}" Click="HideButton_Click" />
+            <Button x:Name="HideButton" Template="{DynamicResource CloseButtonTemplate}" ToolTip="{DynamicResource HideTip}" Click="HideButton_Click" />
         </StackPanel>
         <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="20" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
             <ListBox.Resources>
@@ -96,10 +69,6 @@
                     </StackPanel>
                 </ControlTemplate>
             </ListBox.Resources>
-            <!--<ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Progress="80" Content="任务1"/>
-            <ui:TaskItem ContextMenu="{DynamicResource TaskContexMenu}" Template="{DynamicResource ListItemTemplate}" Content="任务2" />-->
-
         </ListBox>
-        <!--<DataGrid Name="Testbox" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding }" ></DataGrid>-->
     </Grid>
 </ui:GWindow>

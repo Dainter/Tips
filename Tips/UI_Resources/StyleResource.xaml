@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Tips.UI_Resources">
+    <ControlTemplate x:Key="CreateButtonTemplate">
+        <Image Stretch="Fill" Source="/Tips;component/images/CreateTask.png"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="CloseButtonTemplate">
+        <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="AcceptButtonTemplate">
+        <Image Stretch="Fill" Source="/Tips;component/images/Accept.png"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="AddStepButtonTemplate">
+        <Image Stretch="Fill" Source="/Tips;component/images/AddStep.png"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RemoveStepButtonTemplate">
+        <Image Stretch="Fill" Source="/Tips;component/images/RemoveStep.png"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

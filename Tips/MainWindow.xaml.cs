@@ -139,7 +139,10 @@ namespace Tips
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateWindow WinTaskCreate = new CreateWindow();
+            WinTaskCreate.Owner = this;
+            WinTaskCreate.ShowDialog();
+            RefreshTaskListBox();
         }
 
         private void ShowTipsItem_Click(object sender, EventArgs e)
@@ -279,6 +282,7 @@ namespace Tips
             EditWindow WinTaskEdit = new EditWindow(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex));
             WinTaskEdit.Owner = this;
             WinTaskEdit.ShowDialog();
+            RefreshTaskListBox();
         }
 
         private void TaskStepsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

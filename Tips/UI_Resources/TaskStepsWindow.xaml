@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ToolTipResource.xaml"/>
+                <ResourceDictionary Source="StyleResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:TipsDBDataSet x:Key="tipsDBDataSet"/>
             <CollectionViewSource x:Key="tabTaskStepViewSource" Source="{Binding tabTaskStep, Source={StaticResource tipsDBDataSet}}"/>
@@ -29,21 +30,6 @@
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="TaskNameBox" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
-            <StackPanel.Resources>
-                <ControlTemplate x:Key="CloseButtonTemplate">
-                    <Image Stretch="Fill" Source="/Tips;component/images/TipsHide.png"/>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="ButtonBase.IsPressed" Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX=".9" ScaleY=".9"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </StackPanel.Resources>
             <Button x:Name="CloseButton" Template="{StaticResource CloseButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="CloseButton_Click" />
         </StackPanel>
         <ListBox x:Name="StepListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0" >
@@ -54,7 +40,6 @@
                     </StackPanel>
                 </ControlTemplate>
             </ListBox.Resources>
-
         </ListBox>
     </Grid>
 </Window>
