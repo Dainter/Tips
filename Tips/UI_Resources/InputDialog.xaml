@@ -1,4 +1,4 @@
-﻿<Window x:Class="Tips.DelayDialog"
+﻿<Window x:Class="Tips.UI_Resources.InputDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="UI_Resources/ToolTipResource.xaml"/>
+                <ResourceDictionary Source="ToolTipResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -25,8 +25,8 @@
             <ColumnDefinition />
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center">
-            请输入任务延迟的原因：
+        <TextBlock x:Name="TitleBox" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="Yellow" VerticalAlignment="Center">
+            
         </TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="3">
             <StackPanel.Resources>
@@ -44,10 +44,10 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </StackPanel.Resources>
-            <TextBox x:Name="ReasonBox" MinWidth="200" Height="25" Margin="3" ToolTip="{DynamicResource ReasonWarnTip}" ></TextBox>
-            <Popup x:Name="ReasonWarning" PlacementTarget="{Binding ElementName=ReasonBox, Mode=OneWay}" StaysOpen="False">
+            <TextBox x:Name="InputBox" MinWidth="200" Height="25" Margin="3" ToolTip="{DynamicResource WarnTip}" ></TextBox>
+            <Popup x:Name="InputWarning" PlacementTarget="{Binding ElementName=ReasonBox, Mode=OneWay}" StaysOpen="False">
                 <Border CornerRadius="2" BorderBrush="Red" BorderThickness="1" Background="White">
-                    <TextBlock Text="{DynamicResource ReasonWarnTip}" Background="White" Margin="1" Foreground="Red" ></TextBlock>
+                    <TextBlock Text="{DynamicResource WarnTip}" Background="White" Margin="1" Foreground="Red" ></TextBlock>
                 </Border>
             </Popup>
             <Button x:Name="AcceptButton" Height="30" Width="30" Template="{StaticResource AcceptButtonTemplate}" ToolTip="{DynamicResource CloseTip}" Click="AcceptButton_Click" />

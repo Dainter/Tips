@@ -61,17 +61,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DelayDialog.xaml.cs">
-      <DependentUpon>DelayDialog.xaml</DependentUpon>
+    <Compile Include="UI_Resources\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditWindow.xaml.cs">
+    <Compile Include="UI_Resources\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ProcessTask.cs" />
     <Compile Include="TaskPlan.cs" />
     <Compile Include="Model\TaskStep.cs" />
-    <Compile Include="TaskStepsWindow.xaml.cs">
+    <Compile Include="UI_Resources\TaskStepsWindow.xaml.cs">
       <DependentUpon>TaskStepsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TipsDBDataSet.Designer.cs">
@@ -83,11 +83,11 @@
     <Compile Include="Settings.cs" />
     <Compile Include="UI_Resources\StepItem.cs" />
     <Compile Include="UI_Resources\TaskItem.cs" />
-    <Page Include="DelayDialog.xaml">
+    <Page Include="UI_Resources\InputDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EditWindow.xaml">
+    <Page Include="UI_Resources\EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,7 +103,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TaskStepsWindow.xaml">
+    <Page Include="UI_Resources\TaskStepsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

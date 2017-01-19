@@ -9,9 +9,8 @@ using System.Windows.Interop;
 using System.Windows.Data;
 using System.Runtime.InteropServices;
 using Tips.Model;
-using Tips.UI_Resources;
 
-namespace Tips
+namespace Tips.UI_Resources
 {
     /// <summary>
     /// TaskStepsWindow.xaml 的交互逻辑

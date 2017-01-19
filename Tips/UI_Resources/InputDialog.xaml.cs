@@ -5,12 +5,12 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 
-namespace Tips
+namespace Tips.UI_Resources
 {
     /// <summary>
     /// DelayDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class DelayDialog : Window
+    public partial class InputDialog : Window
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct MARGINS
@@ -26,15 +26,17 @@ namespace Tips
             IntPtr hwnd,
             ref MARGINS pMarInset);
         //Global Element
-        private string strReason;
-        public string Reason
+        private string strTitle;
+        private string strOutput;
+        public string Output
         {
-            get { return strReason; }
+            get { return strOutput; }
         }
 
-        public DelayDialog()
+        public InputDialog(string sTitle)
         {
             InitializeComponent();
+            strTitle = sTitle;
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -79,14 +81,15 @@ namespace Tips
         {
             this.Background = Brushes.Transparent;
             ExtendAeroGlass(this);
+            TitleBox.Text = strTitle;
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            strReason = ReasonBox.Text;
-            if (strReason == "")
+            strOutput = InputBox.Text;
+            if (strOutput == "")
             {
-                ReasonWarning.IsOpen = true;
+                InputWarning.IsOpen = true;
                 return;
             }
             this.Close();

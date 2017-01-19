@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Tips.Model;
 
-namespace Tips
+namespace Tips.UI_Resources
 {
     /// <summary>
     /// EditWindow.xaml 的交互逻辑
@@ -164,5 +164,33 @@ namespace Tips
             this.Close();
         }
 
+        private void AddStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            string strStepName;
+            InputDialog DiaNewStep = new InputDialog("请输入新步骤名称：");
+            DiaNewStep.Owner = this;
+            DiaNewStep.ShowDialog();
+            strStepName = DiaNewStep.Output;
+            stepItemListBox.Items.Add(strStepName);
+        }
+
+        private void RemoveStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<object> SelectItemList;
+
+            if(stepItemListBox.SelectedItems.Count <=0)
+            {
+                return;
+            }
+            SelectItemList = new List<object>();
+            foreach (object StepItem in stepItemListBox.SelectedItems)
+            {
+                SelectItemList.Add(StepItem);
+            }
+            foreach (object StepItem in SelectItemList)
+            {
+                stepItemListBox.Items.Remove(StepItem);
+            }
+        }
     }
 }

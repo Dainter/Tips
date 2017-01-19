@@ -218,10 +218,10 @@ namespace Tips
         private void TaskDelayCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string strReason;
-            DelayDialog DiaDelay = new DelayDialog();
+            InputDialog DiaDelay = new InputDialog("请输入任务延迟的原因：");
             DiaDelay.Owner = this;
             DiaDelay.ShowDialog();
-            strReason = DiaDelay.Reason;
+            strReason = DiaDelay.Output;
             TaskDelay(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex), strReason);
             RemoveCurrentTask(TaskListBox.SelectedIndex);
         }
