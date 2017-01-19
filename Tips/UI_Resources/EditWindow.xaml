@@ -76,6 +76,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Right" >
                     <Button x:Name="AddStepButton" Template="{StaticResource AddStepButtonTemplate}" ToolTip="{DynamicResource AddStepTip}" Click="AddStepButton_Click" />
                     <Button x:Name="RemoveStepButton" Template="{StaticResource RemoveStepButtonTemplate}" ToolTip="{DynamicResource RemoveStepTip}" Click="RemoveStepButton_Click" IsEnabled="{Binding SelectedItems.Count, Converter={StaticResource BoolConverter}, ElementName=stepItemListBox, Mode=OneWay}"  />
+                    <Button x:Name="AcceptButton" Template="{DynamicResource AcceptButtonTemplate}" ToolTip="{DynamicResource AcceptTip}" Click="AcceptButton_Click" />
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -78,8 +78,14 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Right" >
                     <Button x:Name="AddStepButton" Template="{StaticResource AddStepButtonTemplate}" ToolTip="{DynamicResource AddStepTip}" Click="AddStepButton_Click" />
                     <Button x:Name="RemoveStepButton" Template="{StaticResource RemoveStepButtonTemplate}" ToolTip="{DynamicResource RemoveStepTip}" Click="RemoveStepButton_Click" IsEnabled="{Binding SelectedItems.Count, Converter={StaticResource BoolConverter}, ElementName=stepItemListBox, Mode=OneWay}"  />
+                    <Button x:Name="AcceptButton" Template="{DynamicResource AcceptButtonTemplate}" ToolTip="{DynamicResource AcceptTip}" Click="AcceptButton_Click" />
                 </StackPanel>
             </StackPanel>
+            <Popup x:Name="InputWarning" StaysOpen="False">
+                <Border CornerRadius="2" BorderBrush="Red" BorderThickness="1" Background="White">
+                    <TextBlock x:Name="WarningInfo" Text="" Background="White" Margin="1" Foreground="Red" ></TextBlock>
+                </Border>
+            </Popup>
         </Grid>
     </Grid>
 </Window>

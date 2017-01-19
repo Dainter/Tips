@@ -31,6 +31,7 @@ namespace Tips.UI_Resources
             IntPtr hwnd,
             ref MARGINS pMarInset);
         //Global Elements
+        bool bIsConfirm;
         string strTaskKey;
         List<TaskStep> tasksteps;
         TipsDBDataSet tipsDBDataSet;
@@ -41,6 +42,11 @@ namespace Tips.UI_Resources
         //CollectionViewSource viewEditTaskViewSource;
         CollectionViewSource tabCategoryViewSource;
         CollectionViewSource tabQLevelViewSource;
+
+        public bool IsConfirm
+        {
+            get { return bIsConfirm; }
+        }
 
         public EditWindow(string sDate)
         {
@@ -159,11 +165,6 @@ namespace Tips.UI_Resources
             }
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void AddStepButton_Click(object sender, RoutedEventArgs e)
         {
             string strStepName;
@@ -191,6 +192,18 @@ namespace Tips.UI_Resources
             {
                 stepItemListBox.Items.Remove(StepItem);
             }
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            bIsConfirm = true;
+            this.Close();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            bIsConfirm = false;
+            this.Close();
         }
     }
 }

@@ -142,7 +142,10 @@ namespace Tips
             CreateWindow WinTaskCreate = new CreateWindow();
             WinTaskCreate.Owner = this;
             WinTaskCreate.ShowDialog();
-            RefreshTaskListBox();
+            if (WinTaskCreate.IsConfirm == true)
+            {
+                RefreshTaskListBox();
+            }  
         }
 
         private void ShowTipsItem_Click(object sender, EventArgs e)
@@ -282,7 +285,10 @@ namespace Tips
             EditWindow WinTaskEdit = new EditWindow(taskplan.GetKeybyIndex(TaskListBox.SelectedIndex));
             WinTaskEdit.Owner = this;
             WinTaskEdit.ShowDialog();
-            RefreshTaskListBox();
+            if (WinTaskEdit.IsConfirm == true)
+            {
+                RefreshTaskListBox();
+            }
         }
 
         private void TaskStepsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

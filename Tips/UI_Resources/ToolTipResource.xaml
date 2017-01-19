@@ -5,7 +5,7 @@
     <sys:String x:Key="TopMostTip">Keep the window topmost.</sys:String>
     <sys:String x:Key="HideTip">Hide the window.</sys:String>
     <sys:String x:Key="CloseTip">Close the window.</sys:String>
-    <sys:String x:Key="AcceptTip">Submit the delay reason.</sys:String>
+    <sys:String x:Key="AcceptTip">Submit.</sys:String>
     <sys:String x:Key="WarnTip">Please enter a non-empty value.</sys:String>
     <sys:String x:Key="AddStepTip">Click to add one step.</sys:String>
     <sys:String x:Key="RemoveStepTip">Click to remove the highlight step.</sys:String>
