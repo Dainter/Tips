@@ -40,6 +40,7 @@ namespace Tips.UI_Resources
         TipsDBDataSet tipsDBDataSet;
         TipsDBDataSetTableAdapters.tabCategoryTableAdapter tipsDBDataSetTabCategoryTableAdapter;
         TipsDBDataSetTableAdapters.tabQLevelTableAdapter tipsDBDataSetTabQLevelTableAdapter;
+        TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter tipsDBDataSetTabProcessTaskTableAdapter;
         TipsDBDataSetTableAdapters.tabTaskStepTableAdapter tipsDBDataSettabTaskStepTableAdapter;
         CollectionViewSource tabCategoryViewSource;
         CollectionViewSource tabQLevelViewSource;
@@ -103,6 +104,9 @@ namespace Tips.UI_Resources
             tipsDBDataSetTabQLevelTableAdapter.Fill(tipsDBDataSet.tabQLevel);
             tabQLevelViewSource = ((CollectionViewSource)(this.FindResource("tabQLevelViewSource")));
 
+            tipsDBDataSetTabProcessTaskTableAdapter = new TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter();
+            tipsDBDataSetTabProcessTaskTableAdapter.Fill(tipsDBDataSet.tabProcessTask);
+
             tipsDBDataSettabTaskStepTableAdapter = new TipsDBDataSetTableAdapters.tabTaskStepTableAdapter();
             tipsDBDataSettabTaskStepTableAdapter.Fill(tipsDBDataSet.tabTaskStep);
 
@@ -155,13 +159,7 @@ namespace Tips.UI_Resources
             //数据组织
             strCategoryID = GetCategoryIndex(strCategory);
             //数据插入数据表
-            //存入任务步骤到tabTaskStep
-            if (tasksteps != null)
-            {
-
-            }
-            //存入主数据到tabProcessTask
-
+            SaveTask();
             bIsConfirm = true;
             this.Close();
         }
@@ -206,9 +204,9 @@ namespace Tips.UI_Resources
             dDate = new DateTime(deadDateDatePicker.SelectedDate.Value.Year,
                                                     deadDateDatePicker.SelectedDate.Value.Month,
                                                     deadDateDatePicker.SelectedDate.Value.Day,
-                                                    DateTime.Now.Hour,
-                                                    DateTime.Now.Minute,
-                                                    DateTime.Now.Second);
+                                                    17,
+                                                    0,
+                                                    0);
             if (dDate.CompareTo(sDate) <= 0)
             {
                 InputWarning.PlacementTarget = deadDateDatePicker;
@@ -258,6 +256,43 @@ namespace Tips.UI_Resources
                 }
             }
             return "0";
+        }
+
+        private void SaveTask()
+        {
+            //存入主数据到tabProcessTask
+            InsertTaskItem(strName, sDate.ToString(), dDate.ToString(), strCategoryID, strQlevel);
+
+            if (tasksteps == null)
+            {
+                return;
+            }
+            //存入任务步骤到tabTaskStep
+            foreach (string step in tasksteps)
+            {
+                InsertTaskStep(step, sDate.ToString());
+            }
+        }
+
+        private void InsertTaskItem(string sName, string ssDate, string sdDate, string sCategory, string sQlevel)
+        {
+            String strCommand = "INSERT INTO tabProcessTask ([TaskName],[StartDate],[DeadDate],[TaskStatusID],[Qlevel],[CategoryID]) VALUES ('" +
+                                                                                            sName+"',#"+ ssDate +"# ,#"+sdDate+"# , 1,'"+sQlevel+"',"+sCategory+")";
+            tipsDBDataSetTabProcessTaskTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSetTabProcessTaskTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSetTabProcessTaskTableAdapter.Connection.Close();
+        }
+
+        private void InsertTaskStep(string sStepName, string strKey)
+        {
+            String strCommand = "INSERT INTO tabTaskStep ([TaskStep],[StartDate],[StepCompleted]) VALUES ('"+ sStepName +"', #"+ strKey +"#, 0)";
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabTaskStepTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Close();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
