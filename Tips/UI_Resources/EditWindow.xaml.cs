@@ -31,13 +31,18 @@ namespace Tips.UI_Resources
             IntPtr hwnd,
             ref MARGINS pMarInset);
         //Global Elements
-        bool bIsConfirm;
-        string strTaskKey;
+        bool bIsConfirm, bIsChanged = false;
+        string strName, strCategory, strQlevel, strCategoryID;
+        DateTime sDate, dDate;
         List<TaskStep> tasksteps;
+        List<string> insertSteps;
+        List<TaskStep> deleteSteps;
+        string strTaskKey; 
         TipsDBDataSet tipsDBDataSet;
         TipsDBDataSetTableAdapters.ViewEditTaskTableAdapter tipsDBDataSetViewEditTaskTableAdapter;
         TipsDBDataSetTableAdapters.tabCategoryTableAdapter tipsDBDataSetTabCategoryTableAdapter;
         TipsDBDataSetTableAdapters.tabQLevelTableAdapter tipsDBDataSetTabQLevelTableAdapter;
+        TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter tipsDBDataSetTabProcessTaskTableAdapter;
         TipsDBDataSetTableAdapters.tabTaskStepTableAdapter tipsDBDataSettabTaskStepTableAdapter;
         //CollectionViewSource viewEditTaskViewSource;
         CollectionViewSource tabCategoryViewSource;
@@ -68,8 +73,6 @@ namespace Tips.UI_Resources
             // 将数据加载到表 ViewEditTask 中。可以根据需要修改此代码。
             tipsDBDataSetViewEditTaskTableAdapter = new TipsDBDataSetTableAdapters.ViewEditTaskTableAdapter();
             tipsDBDataSetViewEditTaskTableAdapter.Fill(tipsDBDataSet.ViewEditTask);
-            //viewEditTaskViewSource = ((CollectionViewSource)(this.FindResource("viewEditTaskViewSource")));
-            //viewEditTaskViewSource.View.MoveCurrentToFirst();
 
             tipsDBDataSetTabCategoryTableAdapter = new TipsDBDataSetTableAdapters.tabCategoryTableAdapter();
             tipsDBDataSetTabCategoryTableAdapter.Fill(tipsDBDataSet.tabCategory);
@@ -79,6 +82,9 @@ namespace Tips.UI_Resources
             tipsDBDataSetTabQLevelTableAdapter.Fill(tipsDBDataSet.tabQLevel);
             tabQLevelViewSource = ((CollectionViewSource)(this.FindResource("tabQLevelViewSource")));
 
+            tipsDBDataSetTabProcessTaskTableAdapter = new TipsDBDataSetTableAdapters.tabProcessTaskTableAdapter();
+            tipsDBDataSetTabProcessTaskTableAdapter.Fill(tipsDBDataSet.tabProcessTask);
+
             tipsDBDataSettabTaskStepTableAdapter = new TipsDBDataSetTableAdapters.tabTaskStepTableAdapter();
             tipsDBDataSettabTaskStepTableAdapter.Fill(tipsDBDataSet.tabTaskStep);
 
@@ -86,22 +92,26 @@ namespace Tips.UI_Resources
 
         private void LoadTaskInfo()
         {
-            DateTime start;
             TipsDBDataSet.ViewEditTaskDataTable table = new TipsDBDataSet.ViewEditTaskDataTable();
             tipsDBDataSetViewEditTaskTableAdapter.Fill(table);
             
             foreach (DataRow currentRow in table.Rows)
             {
-                start = (DateTime)currentRow["StartDate"];
-                if (start.ToString() != strTaskKey)
+                sDate = (DateTime)currentRow["StartDate"];
+                if (sDate.ToString() != strTaskKey)
                 {
                     continue;
                 }
-                taskNameTextBox.Text = (string)currentRow["TaskName"];
-                startDateDatePicker.SelectedDate = start;
-                deadDateDatePicker.SelectedDate = (DateTime)currentRow["DeadDate"];
-                categoryComboBox.Text = (string)currentRow["Category"];
-                qlevelComboBox.Text = (string)currentRow["Qlevel"];
+                startDateDatePicker.SelectedDate = sDate;
+                strName = (string)currentRow["TaskName"];
+                taskNameTextBox.Text = strName;
+                dDate = (DateTime)currentRow["DeadDate"];
+                deadDateDatePicker.SelectedDate = dDate;
+                strCategory = (string)currentRow["Category"];
+                categoryComboBox.Text = strCategory;
+                strQlevel = (string)currentRow["Qlevel"];
+                qlevelComboBox.Text = strQlevel;
+                break;
             }
             LoadStepsInfo();
         }
@@ -112,7 +122,7 @@ namespace Tips.UI_Resources
             int Index;
             string strName;
             
-            string strCommand = "SELECT [ID],[TaskStep] FROM tabTaskStep WHERE [StartDate] = #" + strTaskKey + "#";
+            string strCommand = "SELECT [ID],[TaskStep] FROM tabTaskStep WHERE [StartDate] = #" + sDate.ToString() + "#";
             tipsDBDataSettabTaskStepTableAdapter.Connection.Open();
             OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabTaskStepTableAdapter.Connection);
             OleDbDataReader DataReader = command.ExecuteReader();
@@ -196,9 +206,210 @@ namespace Tips.UI_Resources
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
+            //合法性校验
+            if (DataVarification() == false)
+            {
+                return;
+            }
+            if (bIsChanged == false)
+            {
+                bIsConfirm = false;
+                this.Close();
+                return;
+            }
+            //数据组织
+            strCategoryID = GetCategoryIndex(strCategory);
+            //保存数据
+            UpdateTask();
             bIsConfirm = true;
             this.Close();
         }
+
+        private bool DataVarification()
+        {
+            bool bolIsExist;
+            bIsChanged = false;
+            //任务名
+            if (taskNameTextBox.Text == "")
+            {
+                InputWarning.PlacementTarget = taskNameTextBox;
+                WarningInfo.Text = "Please enter a non-empty value.";
+                InputWarning.IsOpen = true;
+                return false;
+            }
+            if(strName != taskNameTextBox.Text)
+            {
+                strName = taskNameTextBox.Text;
+                bIsChanged = true;
+            }
+            
+            //完成期限
+            if (deadDateDatePicker.SelectedDate == null)
+            {
+                InputWarning.PlacementTarget = deadDateDatePicker;
+                WarningInfo.Text = "Please select a deadline for the task.";
+                InputWarning.IsOpen = true;
+                return false;
+            }
+            if (deadDateDatePicker.SelectedDate.Value.CompareTo(sDate) <= 0)
+            {
+                InputWarning.PlacementTarget = deadDateDatePicker;
+                WarningInfo.Text = "The deadline must later than the start date.";
+                InputWarning.IsOpen = true;
+                return false;
+            }
+            if (deadDateDatePicker.SelectedDate.Value.CompareTo(dDate) != 0)
+            {
+                dDate = new DateTime(deadDateDatePicker.SelectedDate.Value.Year,
+                                                    deadDateDatePicker.SelectedDate.Value.Month,
+                                                    deadDateDatePicker.SelectedDate.Value.Day,
+                                                    17,
+                                                    0,
+                                                    0);
+                bIsChanged = true;
+            }
+            //任务类别
+            if (categoryComboBox.Text == "")
+            {
+                InputWarning.PlacementTarget = categoryComboBox;
+                WarningInfo.Text = "Please select a category for the task.";
+                InputWarning.IsOpen = true;
+                return false;
+            }
+            if (strCategory != categoryComboBox.Text)
+            {
+                strCategory = categoryComboBox.Text;
+                bIsChanged = true;
+            }
+            //任务级别
+            if (strQlevel == "")
+            {
+                InputWarning.PlacementTarget = qlevelComboBox;
+                WarningInfo.Text = "Please select a Q level for the task.";
+                InputWarning.IsOpen = true;
+                return false;
+            }
+            if (strQlevel != qlevelComboBox.Text)
+            {
+                strQlevel = qlevelComboBox.Text;
+                bIsChanged = true;
+            }
+            //步骤
+            if (stepItemListBox.Items.Count == 0)
+            {
+                tasksteps = null;
+                return true;
+            }
+            //比较两表生成一个Insert表，一个Delete表
+            deleteSteps = new List<TaskStep>();
+            foreach (TaskStep curStep in tasksteps)
+            {
+                bolIsExist = false;
+                foreach (string sItem in stepItemListBox.Items)
+                {
+                    if (curStep.StepName == sItem)
+                    {
+                        bolIsExist = true;
+                    }
+                }
+                if (bolIsExist == false)
+                {
+                    deleteSteps.Add(curStep);
+                }
+            }
+            insertSteps = new List<string>();
+            foreach (string sItem in stepItemListBox.Items)
+            {
+                bolIsExist = false;
+                foreach (TaskStep curStep in tasksteps)
+                {
+                    if (curStep.StepName == sItem)
+                    {
+                        bolIsExist = true;
+                    }
+                }
+                if (bolIsExist == false)
+                {
+                    insertSteps.Add(sItem);
+                }
+            }
+            if (deleteSteps.Count == 0 && insertSteps.Count == 0)
+            {
+                bIsChanged = true;
+            }
+            return true;
+        }
+
+        private string GetCategoryIndex(string sCategory)
+        {
+            foreach (DataRow currentRow in tipsDBDataSet.tabCategory)
+            {
+                if (sCategory == (string)currentRow["Category"])
+                {
+                    return currentRow["ID"].ToString();
+                }
+            }
+            return "0";
+        }
+
+        private void UpdateTask()
+        {
+            //存入主数据到tabProcessTask
+            UpdateTaskItem(strName, sDate.ToString(), dDate.ToString(), strCategoryID, strQlevel);
+
+            if (deleteSteps.Count != 0)
+            {
+                //删除任务步骤
+                foreach (TaskStep curStep in deleteSteps)
+                {
+                    DeleteTaskStep(curStep.Index.ToString());
+                }
+            }
+            if (insertSteps.Count != 0)
+            {
+                //存入任务步骤到tabTaskStep
+                foreach (string step in insertSteps)
+                {
+                    InsertTaskStep(step, sDate.ToString());
+                }
+            }
+            return;
+        }
+
+        private void UpdateTaskItem(string sName, string ssDate, string sdDate, string sCategory, string sQlevel)
+        {
+            String strCommand = "UPDATE tabProcessTask SET [TaskName] ='"+ sName +
+                                                                                        "', [DeadDate]= #"+ sdDate +
+                                                                                        "#, [Qlevel] = '"+ sQlevel +
+                                                                                        "', [CategoryID] = " + sCategory +
+                                                                                        " WHERE [StartDate] = #" + ssDate + "#";
+            tipsDBDataSetTabProcessTaskTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSetTabProcessTaskTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSetTabProcessTaskTableAdapter.Connection.Close();
+        }
+
+        private void DeleteTaskStep(string sStepID)
+        {
+            String strCommand = "DELETE FROM tabTaskStep WHERE [ID] ="+ sStepID;
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabTaskStepTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Close();
+        }
+
+        private void InsertTaskStep(string sStepName, string strKey)
+        {
+            String strCommand = "INSERT INTO tabTaskStep ([TaskStep],[StartDate],[StepCompleted]) VALUES ('" + sStepName + "', #" + strKey + "#, 0)";
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Open();
+            OleDbCommand command = new OleDbCommand(strCommand, tipsDBDataSettabTaskStepTableAdapter.Connection);
+            int iCount = command.ExecuteNonQuery();
+            tipsDBDataSet.GetChanges();
+            tipsDBDataSettabTaskStepTableAdapter.Connection.Close();
+        }
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {

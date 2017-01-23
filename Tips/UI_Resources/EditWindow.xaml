@@ -79,6 +79,11 @@
                     <Button x:Name="AcceptButton" Template="{DynamicResource AcceptButtonTemplate}" ToolTip="{DynamicResource AcceptTip}" Click="AcceptButton_Click" />
                 </StackPanel>
             </StackPanel>
+            <Popup x:Name="InputWarning" StaysOpen="False">
+                <Border CornerRadius="2" BorderBrush="Red" BorderThickness="1" Background="White">
+                    <TextBlock x:Name="WarningInfo" Text="" Background="White" Margin="1" Foreground="Red" ></TextBlock>
+                </Border>
+            </Popup>
         </Grid>
     </Grid>
 </Window>
