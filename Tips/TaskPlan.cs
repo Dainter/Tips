@@ -9,20 +9,28 @@ namespace Tips
     public class TaskPlan
     {
         List<ProcessTask> CurrentTask;
-        //List<Task> CompletedTask;
-        //List<Task> DelayTask;
         List<TaskItem> processtasklist;
+        List<ProcessTask> DelayTask;
+        List<TaskItem> delaytasklist;
 
         public List<TaskItem> ProcessTaskList
         {
             get { return processtasklist; }
-        } 
+        }
+
+        public List<TaskItem> DelayTaskList
+        {
+            get { return delaytasklist; }
+        }
 
         public TaskPlan()
         {
             CurrentTask = new List<ProcessTask>();
             processtasklist = new List<TaskItem>();
+            DelayTask = new List<ProcessTask>();
+            delaytasklist = new List<TaskItem>();
             RefreshProcessTask();
+            RefreshDelayTask();
         }
 
         public void RefreshProcessTask()
@@ -64,6 +72,33 @@ namespace Tips
             processtasklist[index].Progress = CurrentTask[index].Progress;
         }
 
+        public void RefreshDelayTask()
+        {
+            string strName, strDelayReason;
+            DateTime start;
+            ProcessTask newTask;
+            TaskItem newTaskItem;
+
+            DelayTask.Clear();
+            delaytasklist.Clear();
+            TipsDBDataSetTableAdapters.ViewTaskDelayTableAdapter adapter = new TipsDBDataSetTableAdapters.ViewTaskDelayTableAdapter();
+            TipsDBDataSet.ViewTaskDelayDataTable table = new TipsDBDataSet.ViewTaskDelayDataTable();
+            adapter.Fill(table);
+            foreach (DataRow currentRow in table.Rows)
+            {
+                strName = currentRow["TaskName"].ToString();
+                start = (DateTime)currentRow["StartDate"];
+                strDelayReason = currentRow["DelayReason"].ToString();
+                newTask = new ProcessTask(strName, start);
+                DelayTask.Add(newTask);
+            }
+            foreach (ProcessTask curTask in DelayTask)
+            {
+                newTaskItem = new TaskItem(curTask.TaskName, curTask.Progress);
+                delaytasklist.Add(newTaskItem);
+            }
+        }
+
         public void RemoveTask(int index)
         {
             CurrentTask.RemoveAt(index);
@@ -90,6 +125,11 @@ namespace Tips
             return CurrentTask[index].StartTime.ToString();
         }
 
-        
+        public string GetDelayKeybyIndex(int index)
+        {
+            return DelayTask[index].StartTime.ToString();
+        }
+
+
     }
 }

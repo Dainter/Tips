@@ -333,7 +333,7 @@ namespace Tips.UI_Resources
                     insertSteps.Add(sItem);
                 }
             }
-            if (deleteSteps.Count == 0 && insertSteps.Count == 0)
+            if (deleteSteps.Count != 0 || insertSteps.Count != 0)
             {
                 bIsChanged = true;
             }
@@ -409,7 +409,6 @@ namespace Tips.UI_Resources
             tipsDBDataSet.GetChanges();
             tipsDBDataSettabTaskStepTableAdapter.Connection.Close();
         }
-
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {

@@ -64,6 +64,9 @@
     <Compile Include="UI_Resources\CreateWindow.xaml.cs">
       <DependentUpon>CreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI_Resources\DelayWindow.xaml.cs">
+      <DependentUpon>DelayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Resources\InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
     <Compile Include="UI_Resources\StepItem.cs" />
     <Compile Include="UI_Resources\TaskItem.cs" />
     <Page Include="UI_Resources\CreateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI_Resources\DelayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

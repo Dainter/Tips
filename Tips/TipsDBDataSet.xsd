@@ -361,6 +361,25 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewTaskDelayTableAdapter" GeneratorDataComponentClassName="ViewTaskDelayTableAdapter" Name="ViewTaskDelay" UserDataComponentName="ViewTaskDelayTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TipsDBConnectionString (Settings)" DbObjectName="ViewTaskDelay" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT TaskName, StartDate, TaskStatus, DelayReason FROM ViewTaskDelay</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TaskName" DataSetColumn="TaskName" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="TaskStatus" DataSetColumn="TaskStatus" />
+              <Mapping SourceColumn="DelayReason" DataSetColumn="DelayReason" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -369,7 +388,7 @@
   <xs:element name="TipsDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TipsDBDataSet" msprop:Generator_UserDSName="TipsDBDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ViewTaskSort" msprop:Generator_TableClassName="ViewTaskSortDataTable" msprop:Generator_TableVarName="tableViewTaskSort" msprop:Generator_TablePropName="ViewTaskSort" msprop:Generator_RowDeletingName="ViewTaskSortRowDeleting" msprop:Generator_RowChangingName="ViewTaskSortRowChanging" msprop:Generator_RowEvHandlerName="ViewTaskSortRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewTaskSortRowDeleted" msprop:Generator_UserTableName="ViewTaskSort" msprop:Generator_RowChangedName="ViewTaskSortRowChanged" msprop:Generator_RowEvArgName="ViewTaskSortRowChangeEvent" msprop:Generator_RowClassName="ViewTaskSortRow">
+        <xs:element name="ViewTaskSort" msprop:Generator_TableClassName="ViewTaskSortDataTable" msprop:Generator_TableVarName="tableViewTaskSort" msprop:Generator_RowChangedName="ViewTaskSortRowChanged" msprop:Generator_TablePropName="ViewTaskSort" msprop:Generator_RowDeletingName="ViewTaskSortRowDeleting" msprop:Generator_RowChangingName="ViewTaskSortRowChanging" msprop:Generator_RowEvHandlerName="ViewTaskSortRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewTaskSortRowDeleted" msprop:Generator_RowClassName="ViewTaskSortRow" msprop:Generator_UserTableName="ViewTaskSort" msprop:Generator_RowEvArgName="ViewTaskSortRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TaskName" msprop:Generator_ColumnVarNameInTable="columnTaskName" msprop:Generator_ColumnPropNameInRow="TaskName" msprop:Generator_ColumnPropNameInTable="TaskNameColumn" msprop:Generator_UserColumnName="TaskName" minOccurs="0">
@@ -387,7 +406,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tabCategory" msprop:Generator_TableClassName="tabCategoryDataTable" msprop:Generator_TableVarName="tabletabCategory" msprop:Generator_RowChangedName="tabCategoryRowChanged" msprop:Generator_TablePropName="tabCategory" msprop:Generator_RowDeletingName="tabCategoryRowDeleting" msprop:Generator_RowChangingName="tabCategoryRowChanging" msprop:Generator_RowEvHandlerName="tabCategoryRowChangeEventHandler" msprop:Generator_RowDeletedName="tabCategoryRowDeleted" msprop:Generator_RowClassName="tabCategoryRow" msprop:Generator_UserTableName="tabCategory" msprop:Generator_RowEvArgName="tabCategoryRowChangeEvent">
+        <xs:element name="tabCategory" msprop:Generator_TableClassName="tabCategoryDataTable" msprop:Generator_TableVarName="tabletabCategory" msprop:Generator_TablePropName="tabCategory" msprop:Generator_RowDeletingName="tabCategoryRowDeleting" msprop:Generator_RowChangingName="tabCategoryRowChanging" msprop:Generator_RowEvHandlerName="tabCategoryRowChangeEventHandler" msprop:Generator_RowDeletedName="tabCategoryRowDeleted" msprop:Generator_UserTableName="tabCategory" msprop:Generator_RowChangedName="tabCategoryRowChanged" msprop:Generator_RowEvArgName="tabCategoryRowChangeEvent" msprop:Generator_RowClassName="tabCategoryRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -403,7 +422,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tabProcessTask" msprop:Generator_TableClassName="tabProcessTaskDataTable" msprop:Generator_TableVarName="tabletabProcessTask" msprop:Generator_RowChangedName="tabProcessTaskRowChanged" msprop:Generator_TablePropName="tabProcessTask" msprop:Generator_RowDeletingName="tabProcessTaskRowDeleting" msprop:Generator_RowChangingName="tabProcessTaskRowChanging" msprop:Generator_RowEvHandlerName="tabProcessTaskRowChangeEventHandler" msprop:Generator_RowDeletedName="tabProcessTaskRowDeleted" msprop:Generator_RowClassName="tabProcessTaskRow" msprop:Generator_UserTableName="tabProcessTask" msprop:Generator_RowEvArgName="tabProcessTaskRowChangeEvent">
+        <xs:element name="tabProcessTask" msprop:Generator_TableClassName="tabProcessTaskDataTable" msprop:Generator_TableVarName="tabletabProcessTask" msprop:Generator_TablePropName="tabProcessTask" msprop:Generator_RowDeletingName="tabProcessTaskRowDeleting" msprop:Generator_RowChangingName="tabProcessTaskRowChanging" msprop:Generator_RowEvHandlerName="tabProcessTaskRowChangeEventHandler" msprop:Generator_RowDeletedName="tabProcessTaskRowDeleted" msprop:Generator_UserTableName="tabProcessTask" msprop:Generator_RowChangedName="tabProcessTaskRowChanged" msprop:Generator_RowEvArgName="tabProcessTaskRowChangeEvent" msprop:Generator_RowClassName="tabProcessTaskRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TaskName" msprop:Generator_ColumnVarNameInTable="columnTaskName" msprop:Generator_ColumnPropNameInRow="TaskName" msprop:Generator_ColumnPropNameInTable="TaskNameColumn" msprop:Generator_UserColumnName="TaskName" minOccurs="0">
@@ -435,7 +454,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tabQLevel" msprop:Generator_TableClassName="tabQLevelDataTable" msprop:Generator_TableVarName="tabletabQLevel" msprop:Generator_RowChangedName="tabQLevelRowChanged" msprop:Generator_TablePropName="tabQLevel" msprop:Generator_RowDeletingName="tabQLevelRowDeleting" msprop:Generator_RowChangingName="tabQLevelRowChanging" msprop:Generator_RowEvHandlerName="tabQLevelRowChangeEventHandler" msprop:Generator_RowDeletedName="tabQLevelRowDeleted" msprop:Generator_RowClassName="tabQLevelRow" msprop:Generator_UserTableName="tabQLevel" msprop:Generator_RowEvArgName="tabQLevelRowChangeEvent">
+        <xs:element name="tabQLevel" msprop:Generator_TableClassName="tabQLevelDataTable" msprop:Generator_TableVarName="tabletabQLevel" msprop:Generator_TablePropName="tabQLevel" msprop:Generator_RowDeletingName="tabQLevelRowDeleting" msprop:Generator_RowChangingName="tabQLevelRowChanging" msprop:Generator_RowEvHandlerName="tabQLevelRowChangeEventHandler" msprop:Generator_RowDeletedName="tabQLevelRowDeleted" msprop:Generator_UserTableName="tabQLevel" msprop:Generator_RowChangedName="tabQLevelRowChanged" msprop:Generator_RowEvArgName="tabQLevelRowChangeEvent" msprop:Generator_RowClassName="tabQLevelRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Q_x0020_level" msprop:Generator_ColumnVarNameInTable="columnQ_level" msprop:Generator_ColumnPropNameInRow="Q_level" msprop:Generator_ColumnPropNameInTable="Q_levelColumn" msprop:Generator_UserColumnName="Q level">
@@ -456,7 +475,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tabTaskStatus" msprop:Generator_TableClassName="tabTaskStatusDataTable" msprop:Generator_TableVarName="tabletabTaskStatus" msprop:Generator_RowChangedName="tabTaskStatusRowChanged" msprop:Generator_TablePropName="tabTaskStatus" msprop:Generator_RowDeletingName="tabTaskStatusRowDeleting" msprop:Generator_RowChangingName="tabTaskStatusRowChanging" msprop:Generator_RowEvHandlerName="tabTaskStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="tabTaskStatusRowDeleted" msprop:Generator_RowClassName="tabTaskStatusRow" msprop:Generator_UserTableName="tabTaskStatus" msprop:Generator_RowEvArgName="tabTaskStatusRowChangeEvent">
+        <xs:element name="tabTaskStatus" msprop:Generator_TableClassName="tabTaskStatusDataTable" msprop:Generator_TableVarName="tabletabTaskStatus" msprop:Generator_TablePropName="tabTaskStatus" msprop:Generator_RowDeletingName="tabTaskStatusRowDeleting" msprop:Generator_RowChangingName="tabTaskStatusRowChanging" msprop:Generator_RowEvHandlerName="tabTaskStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="tabTaskStatusRowDeleted" msprop:Generator_UserTableName="tabTaskStatus" msprop:Generator_RowChangedName="tabTaskStatusRowChanged" msprop:Generator_RowEvArgName="tabTaskStatusRowChangeEvent" msprop:Generator_RowClassName="tabTaskStatusRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -470,7 +489,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tabTaskStep" msprop:Generator_TableClassName="tabTaskStepDataTable" msprop:Generator_TableVarName="tabletabTaskStep" msprop:Generator_RowChangedName="tabTaskStepRowChanged" msprop:Generator_TablePropName="tabTaskStep" msprop:Generator_RowDeletingName="tabTaskStepRowDeleting" msprop:Generator_RowChangingName="tabTaskStepRowChanging" msprop:Generator_RowEvHandlerName="tabTaskStepRowChangeEventHandler" msprop:Generator_RowDeletedName="tabTaskStepRowDeleted" msprop:Generator_RowClassName="tabTaskStepRow" msprop:Generator_UserTableName="tabTaskStep" msprop:Generator_RowEvArgName="tabTaskStepRowChangeEvent">
+        <xs:element name="tabTaskStep" msprop:Generator_TableClassName="tabTaskStepDataTable" msprop:Generator_TableVarName="tabletabTaskStep" msprop:Generator_TablePropName="tabTaskStep" msprop:Generator_RowDeletingName="tabTaskStepRowDeleting" msprop:Generator_RowChangingName="tabTaskStepRowChanging" msprop:Generator_RowEvHandlerName="tabTaskStepRowChangeEventHandler" msprop:Generator_RowDeletedName="tabTaskStepRowDeleted" msprop:Generator_UserTableName="tabTaskStep" msprop:Generator_RowChangedName="tabTaskStepRowChanged" msprop:Generator_RowEvArgName="tabTaskStepRowChangeEvent" msprop:Generator_RowClassName="tabTaskStepRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -486,7 +505,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ViewEditTask" msprop:Generator_TableClassName="ViewEditTaskDataTable" msprop:Generator_TableVarName="tableViewEditTask" msprop:Generator_TablePropName="ViewEditTask" msprop:Generator_RowDeletingName="ViewEditTaskRowDeleting" msprop:Generator_RowChangingName="ViewEditTaskRowChanging" msprop:Generator_RowEvHandlerName="ViewEditTaskRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewEditTaskRowDeleted" msprop:Generator_UserTableName="ViewEditTask" msprop:Generator_RowChangedName="ViewEditTaskRowChanged" msprop:Generator_RowEvArgName="ViewEditTaskRowChangeEvent" msprop:Generator_RowClassName="ViewEditTaskRow">
+        <xs:element name="ViewEditTask" msprop:Generator_TableClassName="ViewEditTaskDataTable" msprop:Generator_TableVarName="tableViewEditTask" msprop:Generator_RowChangedName="ViewEditTaskRowChanged" msprop:Generator_TablePropName="ViewEditTask" msprop:Generator_RowDeletingName="ViewEditTaskRowDeleting" msprop:Generator_RowChangingName="ViewEditTaskRowChanging" msprop:Generator_RowEvHandlerName="ViewEditTaskRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewEditTaskRowDeleted" msprop:Generator_RowClassName="ViewEditTaskRow" msprop:Generator_UserTableName="ViewEditTask" msprop:Generator_RowEvArgName="ViewEditTaskRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TaskName" msprop:Generator_ColumnVarNameInTable="columnTaskName" msprop:Generator_ColumnPropNameInRow="TaskName" msprop:Generator_ColumnPropNameInTable="TaskNameColumn" msprop:Generator_UserColumnName="TaskName" minOccurs="0">
@@ -509,6 +528,34 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewTaskDelay" msprop:Generator_TableClassName="ViewTaskDelayDataTable" msprop:Generator_TableVarName="tableViewTaskDelay" msprop:Generator_TablePropName="ViewTaskDelay" msprop:Generator_RowDeletingName="ViewTaskDelayRowDeleting" msprop:Generator_RowChangingName="ViewTaskDelayRowChanging" msprop:Generator_RowEvHandlerName="ViewTaskDelayRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewTaskDelayRowDeleted" msprop:Generator_UserTableName="ViewTaskDelay" msprop:Generator_RowChangedName="ViewTaskDelayRowChanged" msprop:Generator_RowEvArgName="ViewTaskDelayRowChangeEvent" msprop:Generator_RowClassName="ViewTaskDelayRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TaskName" msprop:Generator_ColumnVarNameInTable="columnTaskName" msprop:Generator_ColumnPropNameInRow="TaskName" msprop:Generator_ColumnPropNameInTable="TaskNameColumn" msprop:Generator_UserColumnName="TaskName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TaskStatus" msprop:Generator_ColumnVarNameInTable="columnTaskStatus" msprop:Generator_ColumnPropNameInRow="TaskStatus" msprop:Generator_ColumnPropNameInTable="TaskStatusColumn" msprop:Generator_UserColumnName="TaskStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DelayReason" msprop:Generator_ColumnVarNameInTable="columnDelayReason" msprop:Generator_ColumnPropNameInRow="DelayReason" msprop:Generator_ColumnPropNameInTable="DelayReasonColumn" msprop:Generator_UserColumnName="DelayReason" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -540,10 +587,10 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="tabCategorytabProcessTask" msdata:parent="tabCategory" msdata:child="tabProcessTask" msdata:parentkey="ID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabCategorytabProcessTask" msprop:Generator_RelationVarName="relationtabCategorytabProcessTask" msprop:Generator_UserParentTable="tabCategory" msprop:Generator_ParentPropName="tabCategoryRow" />
-      <msdata:Relationship name="tabQLeveltabProcessTask" msdata:parent="tabQLevel" msdata:child="tabProcessTask" msdata:parentkey="Q_x0020_level" msdata:childkey="Qlevel" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabQLeveltabProcessTask" msprop:Generator_ParentPropName="tabQLevelRow" msprop:Generator_RelationVarName="relationtabQLeveltabProcessTask" msprop:Generator_UserParentTable="tabQLevel" />
-      <msdata:Relationship name="tabTaskStatustabProcessTask" msdata:parent="tabTaskStatus" msdata:child="tabProcessTask" msdata:parentkey="ID" msdata:childkey="TaskStatusID" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabTaskStatustabProcessTask" msprop:Generator_ParentPropName="tabTaskStatusRow" msprop:Generator_RelationVarName="relationtabTaskStatustabProcessTask" msprop:Generator_UserParentTable="tabTaskStatus" />
-      <msdata:Relationship name="tabProcessTasktabTaskStep" msdata:parent="tabProcessTask" msdata:child="tabTaskStep" msdata:parentkey="StartDate" msdata:childkey="StartDate" msprop:Generator_UserChildTable="tabTaskStep" msprop:Generator_ChildPropName="GettabTaskStepRows" msprop:Generator_UserRelationName="tabProcessTasktabTaskStep" msprop:Generator_RelationVarName="relationtabProcessTasktabTaskStep" msprop:Generator_UserParentTable="tabProcessTask" msprop:Generator_ParentPropName="tabProcessTaskRow" />
+      <msdata:Relationship name="tabCategorytabProcessTask" msdata:parent="tabCategory" msdata:child="tabProcessTask" msdata:parentkey="ID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabCategorytabProcessTask" msprop:Generator_ParentPropName="tabCategoryRow" msprop:Generator_RelationVarName="relationtabCategorytabProcessTask" msprop:Generator_UserParentTable="tabCategory" />
+      <msdata:Relationship name="tabQLeveltabProcessTask" msdata:parent="tabQLevel" msdata:child="tabProcessTask" msdata:parentkey="Q_x0020_level" msdata:childkey="Qlevel" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabQLeveltabProcessTask" msprop:Generator_RelationVarName="relationtabQLeveltabProcessTask" msprop:Generator_UserParentTable="tabQLevel" msprop:Generator_ParentPropName="tabQLevelRow" />
+      <msdata:Relationship name="tabTaskStatustabProcessTask" msdata:parent="tabTaskStatus" msdata:child="tabProcessTask" msdata:parentkey="ID" msdata:childkey="TaskStatusID" msprop:Generator_UserChildTable="tabProcessTask" msprop:Generator_ChildPropName="GettabProcessTaskRows" msprop:Generator_UserRelationName="tabTaskStatustabProcessTask" msprop:Generator_RelationVarName="relationtabTaskStatustabProcessTask" msprop:Generator_UserParentTable="tabTaskStatus" msprop:Generator_ParentPropName="tabTaskStatusRow" />
+      <msdata:Relationship name="tabProcessTasktabTaskStep" msdata:parent="tabProcessTask" msdata:child="tabTaskStep" msdata:parentkey="StartDate" msdata:childkey="StartDate" msprop:Generator_UserChildTable="tabTaskStep" msprop:Generator_ChildPropName="GettabTaskStepRows" msprop:Generator_UserRelationName="tabProcessTasktabTaskStep" msprop:Generator_ParentPropName="tabProcessTaskRow" msprop:Generator_RelationVarName="relationtabProcessTasktabTaskStep" msprop:Generator_UserParentTable="tabProcessTask" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

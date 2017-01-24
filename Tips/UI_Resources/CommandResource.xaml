@@ -5,5 +5,6 @@
     <RoutedUICommand x:Key="TaskAbortCommand" Text="Abort" />
     <RoutedUICommand x:Key="TaskEditCommand" Text="Edit" />
     <RoutedUICommand x:Key="TaskStepsCommand" Text="Steps" />
+    <RoutedUICommand x:Key="TaskResumeCommand" Text="Resume" />
 
 </ResourceDictionary>

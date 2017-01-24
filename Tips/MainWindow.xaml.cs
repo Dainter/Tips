@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using System.Windows.Data;
 using System.Runtime.InteropServices;
-using Tips.Model;
 using Tips.UI_Resources;
 
 namespace Tips
@@ -39,7 +38,6 @@ namespace Tips
         {
             InitializeComponent();
             FrmMainInit();
-            
         }
 
         private void ExtendAeroGlass(Window window)
@@ -166,6 +164,13 @@ namespace Tips
         private void DelayTaskItem_Click(object sender, EventArgs e)
         {
             //打开延迟任务列表
+            DelayWindow WinTaskDelay = new DelayWindow(taskplan);
+            WinTaskDelay.Owner = this;
+            WinTaskDelay.ShowDialog();
+            if (WinTaskDelay.IsChanged == true)
+            {
+                RefreshTaskListBox();
+            }
         }
 
         private void ShowHistoryItem_Click(object sender, EventArgs e)

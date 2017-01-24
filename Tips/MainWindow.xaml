@@ -52,7 +52,7 @@
             </ToggleButton>
             <Button x:Name="HideButton" Template="{DynamicResource CloseButtonTemplate}" ToolTip="{DynamicResource HideTip}" Click="HideButton_Click" />
         </StackPanel>
-        <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="20" Foreground="Yellow" BorderThickness="0" Margin="5,20,5,5">
+        <ListBox x:Name="TaskListBox"  Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" FontSize="20" Foreground="Yellow" BorderThickness="0" Margin="5,10,5,5">
             <ListBox.Resources>
                 <ContextMenu x:Key="TaskContexMenu" HasDropShadow="True">
                     <MenuItem x:Name="TaskCompleteItem" Header="完成" Command="{DynamicResource TaskCompleteCommand}" />

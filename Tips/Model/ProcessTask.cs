@@ -61,6 +61,12 @@ namespace Tips.Model
             TaskStepInit(datStart.ToString());
         }
 
+        public ProcessTask(string sName, DateTime dStart)
+        {
+            strName = sName;
+            datStart = dStart;
+        }
+
         private void TaskStepInit(string sDatetime)
         {
             DateTime start;
